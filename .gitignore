@@ -1,0 +1,6 @@
+.idea
+.temp
+*.swp
+*.swo
+*.log
+*.DS_Store
