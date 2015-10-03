@@ -1,8 +1,8 @@
 /*
  * contador de tiempo. en un minuto termina el juego.
  */
-const int lowestPin = 2;
-const int highestPin = 13;
+const int lowestPin = 3;
+const int highestPin = 8;
 
 
 void setup() {
