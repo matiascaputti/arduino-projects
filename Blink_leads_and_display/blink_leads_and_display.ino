@@ -2,7 +2,7 @@
 Led RGB
 Function to turn on an RGB led and set it's on/off time
 */
- 
+
 int RGB_1_redPin  =  30;
 int RGB_1_greenPin = 29;
 int RGB_1_bluePin  = 28;
@@ -61,27 +61,27 @@ void setup() {
   pinMode(RGB_1_redPin, OUTPUT);
   pinMode(RGB_1_greenPin, OUTPUT);
   pinMode(RGB_1_bluePin, OUTPUT);
-   
+
   pinMode(RGB_2_redPin, OUTPUT);
   pinMode(RGB_2_greenPin, OUTPUT);
   pinMode(RGB_2_bluePin, OUTPUT);
-  
+
   pinMode(RGB_3_redPin, OUTPUT);
   pinMode(RGB_3_greenPin, OUTPUT);
   pinMode(RGB_3_bluePin, OUTPUT);
-  
+
   pinMode(RGB_4_redPin, OUTPUT);
   pinMode(RGB_4_greenPin, OUTPUT);
   pinMode(RGB_4_bluePin, OUTPUT);
-  
+
   pinMode(RGB_5_redPin, OUTPUT);
   pinMode(RGB_5_greenPin, OUTPUT);
   pinMode(RGB_5_bluePin, OUTPUT);
-  
+
   pinMode(RGB_6_redPin, OUTPUT);
   pinMode(RGB_6_greenPin, OUTPUT);
   pinMode(RGB_6_bluePin, OUTPUT);
-  
+
   pinMode(RGB_7_redPin, OUTPUT);
   pinMode(RGB_7_greenPin, OUTPUT);
   pinMode(RGB_7_bluePin, OUTPUT);
@@ -120,16 +120,15 @@ void loop2() {
 }
 
 void loop3() {
-      if ( thisPin == 40) {
-        for (int h = lowestPin; h <= highestPin; h++) {
-          analogWrite(h, 0);
-          thisPin = lowestPin;
-        }
+    if ( thisPin == 40) {
+      for (int h = lowestPin; h <= highestPin; h++) {
+        analogWrite(h, 0);
         thisPin = lowestPin;
       }
-      analogWrite(thisPin, 255);
-      thisPin++;
-    
+      thisPin = lowestPin;
+    }
+    analogWrite(thisPin, 255);
+    thisPin++;
 }
 
 void loop() {
@@ -156,10 +155,10 @@ void loop() {
     loop3();
         for (int j=0; j<50; j++) {
       loop2();
-     
+
     }
     loop3();
-    
+
     blinkRGB(RGB_1_redPin, RGB_1_greenPin, RGB_1_bluePin, 255, 0, 255, 0, 0, RGB_1_type, RGB_1_name);
     blinkRGB(RGB_2_redPin, RGB_2_greenPin, RGB_2_bluePin, 255, 0, 255, 0, 0, RGB_2_type, RGB_2_name);
     blinkRGB(RGB_3_redPin, RGB_3_greenPin, RGB_3_bluePin, 255, 0, 255, 0, 0, RGB_3_type, RGB_3_name);
@@ -169,14 +168,13 @@ void loop() {
     blinkRGB(RGB_7_redPin, RGB_7_greenPin, RGB_7_bluePin, 255, 0, 255, 0, 0, RGB_7_type, RGB_7_name);
     //delay(1000);
 
-    
-        for (int j=0; j<50; j++) {
+
+    for (int j=0; j<50; j++) {
       loop2();
-     
     }
     loop3();
-    
-    
+
+
     blinkRGB(RGB_1_redPin, RGB_1_greenPin, RGB_1_bluePin, 0, 255, 0, 0, 0, RGB_1_type, RGB_1_name);
     blinkRGB(RGB_2_redPin, RGB_2_greenPin, RGB_2_bluePin, 0, 255, 0, 0, 0, RGB_2_type, RGB_2_name);
     blinkRGB(RGB_3_redPin, RGB_3_greenPin, RGB_3_bluePin, 0, 255, 0, 0, 0, RGB_3_type, RGB_3_name);
@@ -186,10 +184,9 @@ void loop() {
     blinkRGB(RGB_7_redPin, RGB_7_greenPin, RGB_7_bluePin, 0, 255, 0, 0, 0, RGB_7_type, RGB_7_name);
     //delay(1000);
 
-    
-        for (int j=0; j<50; j++) {
+
+    for (int j=0; j<50; j++) {
       loop2();
-     
     }
     loop3();
 
@@ -202,13 +199,12 @@ void loop() {
     blinkRGB(RGB_7_redPin, RGB_7_greenPin, RGB_7_bluePin, 255, 255, 0, 0, 0, RGB_7_type, RGB_7_name);
     //delay(1000);
 
-    
-        for (int j=0; j<50; j++) {
+
+    for (int j=0; j<50; j++) {
       loop2();
-     
     }
     loop3();
-    
+
     blinkRGB(RGB_1_redPin, RGB_1_greenPin, RGB_1_bluePin, 0, 0, 255, 0, 0, RGB_1_type, RGB_1_name);
     blinkRGB(RGB_2_redPin, RGB_2_greenPin, RGB_2_bluePin, 0, 0, 255, 0, 0, RGB_2_type, RGB_2_name);
     blinkRGB(RGB_3_redPin, RGB_3_greenPin, RGB_3_bluePin, 0, 0, 255, 0, 0, RGB_3_type, RGB_3_name);
@@ -217,13 +213,12 @@ void loop() {
     blinkRGB(RGB_6_redPin, RGB_6_greenPin, RGB_6_bluePin, 0, 0, 255, 0, 0, RGB_6_type, RGB_6_name);
     blinkRGB(RGB_7_redPin, RGB_7_greenPin, RGB_7_bluePin, 0, 0, 255, 0, 0, RGB_7_type, RGB_7_name);
     //delay(1000);
-    
-        for (int j=0; j<50; j++) {
+
+    for (int j=0; j<50; j++) {
       loop2();
-     
     }
     loop3();
-    
+
     blinkRGB(RGB_1_redPin, RGB_1_greenPin, RGB_1_bluePin, 0, 255, 255, 0, 0, RGB_1_type, RGB_1_name);
     blinkRGB(RGB_2_redPin, RGB_2_greenPin, RGB_2_bluePin, 0, 255, 255, 0, 0, RGB_2_type, RGB_2_name);
     blinkRGB(RGB_3_redPin, RGB_3_greenPin, RGB_3_bluePin, 0, 255, 255, 0, 0, RGB_3_type, RGB_3_name);
@@ -233,10 +228,9 @@ void loop() {
     blinkRGB(RGB_7_redPin, RGB_7_greenPin, RGB_7_bluePin, 0, 255, 255, 0, 0, RGB_7_type, RGB_7_name);
     //delay(1000);
 
-     
-        for (int j=0; j<50; j++) {
+
+    for (int j=0; j<50; j++) {
       loop2();
-     
     }
-    
+
 }
