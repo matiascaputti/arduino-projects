@@ -15,8 +15,8 @@
  */
 // These constants won't change.  They're used to give names
 // to the pins used:
-const int lowestPin = 2;
-const int highestPin = 13;
+const int lowestPin = 31;
+const int highestPin = 39;
 
 
 void setup() {

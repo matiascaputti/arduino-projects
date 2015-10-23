@@ -10,7 +10,6 @@ char RGB_1_type = 'A';
 String RGB_1_name = "RGB_1";
  
 void setup() {
-  Serial.begin(9600);
   pinMode(RGB_1_redPin, OUTPUT);
   pinMode(RGB_1_greenPin, OUTPUT);
   pinMode(RGB_1_bluePin, OUTPUT);
@@ -23,11 +22,6 @@ void blinkRGB(int pinRed, int pinGreen, int pinBlue,
   if (type == 'A') { red = 255 - red; green = 255 - green; blue = 255 - blue; off = 255 - off; }
   analogWrite(pinRed, red); analogWrite(pinGreen, green); analogWrite(pinBlue, blue);
 
-  Serial.print(RGBname); Serial.print(", ");
-  Serial.print(red); Serial.print(", ");
-  Serial.print(green); Serial.print(", ");
-  Serial.print(blue); Serial.println();
-  
   delay(timeOn);
   analogWrite(pinRed, off); analogWrite(pinGreen, off); analogWrite(pinBlue, off);
   delay(timeOff);

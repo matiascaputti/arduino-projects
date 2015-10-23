@@ -4,8 +4,8 @@ SevSeg sevseg; //Initiate a seven segment controller object
 
 void setup() {
   byte numDigits = 4;
-  byte digitPins[] = {2, 3, 4, 5};
-  byte segmentPins[] = {6, 7, 8, 9, 10, 11, 12, 13};
+  byte digitPins[] = {42, 43, 44, 45};
+  byte segmentPins[] = {46, 47, 48, 49, 50, 51, 52, 53};
 
   Serial.begin(9600);
   sevseg.begin(COMMON_ANODE, numDigits, digitPins, segmentPins);
@@ -15,6 +15,7 @@ void setup() {
 void loop() {
   static unsigned long timer = millis();
   static int deciSeconds = 0;
+
   
   if (millis() >= timer) {
     deciSeconds++; // 100 milliSeconds is equal to 1 deciSecond
@@ -25,6 +26,9 @@ void loop() {
     sevseg.setNumber(deciSeconds, 1);
     //Serial.println(deciSeconds);
   }
+  
+
+ // sevseg.setNumber(1111, 1);
 
   sevseg.refreshDisplay(); // Must run repeatedly
 }
