@@ -98,7 +98,7 @@ void loop() {
 
   maxValue = -1;
   //Serial.print(sensor1Value);
-  //Serial.print(sensor2Va
+  //Serial.print(sensor2Value);
 
   for (i = 0; i < 7; i++) {
     if ( values[i] > maxValue ) {
