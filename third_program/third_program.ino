@@ -73,7 +73,7 @@ int maxValue=INT_MIN;
 
 void setup() {
   // declare the ledPin as an OUTPUT:
-  Serial.begin(115200);
+  Serial.begin(9600);
   /*
   pinMode(RGB_1_redPin, OUTPUT);
   pinMode(RGB_1_greenPin, OUTPUT);
@@ -99,17 +99,17 @@ void action(int sensorValue, int RGB_redPin, int RGB_greenPin,
             int RGB_bluePin, char RGB_type, String RGB_name) {
 
   Serial.println(sensorValue);
-  if (sensorValue > 50) {
-      blinkRGB(RGB_redPin, RGB_greenPin, RGB_bluePin, 0, 0, 255, 500, 0, RGB_type, RGB_name);
-      delay(500);
+  if (sensorValue > 7) {
+      blinkRGB(RGB_redPin, RGB_greenPin, RGB_bluePin, 0, 255, 0, 500, 0, RGB_type, RGB_name);
+      delay(300);
       blinkRGB(RGB_redPin, RGB_greenPin, RGB_bluePin, 0, 0, 0, 500, 0, RGB_type, RGB_name);
 
   }
 
 }
 
-void loop() {
 
+void loop() {
 
   // TEST 1 LED A LA VEZ
   /*
@@ -122,6 +122,8 @@ void loop() {
   sensor7Value = analogRead(sensor7Pin) / 20;
   */
 
+
+  //delay(1000);
   /*
   action(sensor1Value, RGB_1_redPin, RGB_1_greenPin, RGB_1_bluePin, RGB_1_type, RGB_1_name);
   action(sensor2Value, RGB_2_redPin, RGB_2_greenPin, RGB_2_bluePin, RGB_2_type, RGB_2_name);
@@ -133,9 +135,7 @@ void loop() {
   */
 
 
-
   // JUEGO PARA 7 SENSORES
-
   values[0] = analogRead(sensor1Pin) / 20;
   values[1] = analogRead(sensor2Pin) / 20;
   values[2] = analogRead(sensor3Pin) / 20;
@@ -161,7 +161,7 @@ void loop() {
         String string_one = "Sensor: ";
         String string_two = string_one + i;
         Serial.println(string_two);
-        Serial.println(values[i]);
+        Serial.println(values[i - 1]);
       }
       delay(1000000000000);
     }
@@ -193,6 +193,24 @@ void loop() {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
