@@ -64,13 +64,23 @@ char RGB_7_type = 'A';
 String RGB_7_name = "RGB_7";
 
 
-int cont = 1;
+int tiros_restantes = 9;
 int puntaje = 0;
-int values[7];
 
+// Variables sensores
+int values[7];
+int maxValue;
 int i, iMax;
-int maxValue=INT_MIN;
-int cota = 7;
+int cota = 100;
+
+// Variables leds arriba
+const int lowestPin = 31;
+const int highestPin = 39;
+
+int pinHasta;
+int thisPin = highestPin;
+
+
 
 void setup() {
   // declare the ledPin as an OUTPUT:
@@ -86,37 +96,44 @@ void setup() {
 
 void blinkRGB(int pinRed, int pinGreen, int pinBlue,
               int red, int green, int blue,
-              int timeOn, int timeOff, char type, String RGBname) {
+              char type, String RGBname) {
   int off = 0;
   if (type == 'A') { red = 255 - red; green = 255 - green; blue = 255 - blue; off = 255 - off; }
   analogWrite(pinRed, red); analogWrite(pinGreen, green); analogWrite(pinBlue, blue);
 
-  //delay(timeOn);
-  //analogWrite(pinRed, off); analogWrite(pinGreen, off); analogWrite(pinBlue, off);
-  //delay(timeOff);
 }
 
 void action(int sensorValue, int RGB_redPin, int RGB_greenPin,
             int RGB_bluePin, char RGB_type, String RGB_name) {
 
-  Serial.println(sensorValue);
+  //Serial.println(sensorValue);
   if (sensorValue > cota) {
-      blinkRGB(RGB_redPin, RGB_greenPin, RGB_bluePin, 0, 255, 0, 500, 0, RGB_type, RGB_name);
-      delay(300);
-      blinkRGB(RGB_redPin, RGB_greenPin, RGB_bluePin, 0, 0, 0, 500, 0, RGB_type, RGB_name);
 
+      for (int i = 1; i < 3000; i++) {
+        blinkRGB(RGB_redPin, RGB_greenPin, RGB_bluePin, 0, 0, 255, RGB_type, RGB_name);
+      }
+      blinkRGB(RGB_redPin, RGB_greenPin, RGB_bluePin, 0, 0, 0, RGB_type, RGB_name);
+      sensorValue = analogRead(sensor1Pin);
+      cota = sensorValue + 50;
+
+      tiros_restantes = tiros_restantes - 1;
+      if (tiros_restantes == 0) {
+        tiros_restantes = 9;
+      }
   }
 
 }
 
+
+
 void calcula(int values[7]) {
-  values[0] = analogRead(sensor1Pin) / 20;
-  values[1] = analogRead(sensor2Pin) / 20;
-  values[2] = analogRead(sensor3Pin) / 20;
-  values[3] = analogRead(sensor4Pin) / 20;
-  values[4] = analogRead(sensor5Pin) / 20;
-  values[5] = analogRead(sensor6Pin) / 20;
-  values[6] = analogRead(sensor7Pin) / 20;
+  values[0] = analogRead(sensor1Pin);
+  values[1] = analogRead(sensor2Pin);
+  values[2] = analogRead(sensor3Pin);
+  values[3] = analogRead(sensor4Pin);
+  values[4] = analogRead(sensor5Pin);
+  values[5] = analogRead(sensor6Pin);
+  values[6] = analogRead(sensor7Pin);
 
   maxValue = -1;
   for (i = 0; i < 7; i++) {
@@ -177,16 +194,22 @@ void loop() {
   action(sensor7Value, RGB_7_redPin, RGB_7_greenPin, RGB_7_bluePin, RGB_7_type, RGB_7_name);
   */
 
-
   // JUEGO PARA 7 SENSORES
-  values[0] = analogRead(sensor1Pin) / 20;
-  values[1] = analogRead(sensor2Pin) / 20;
-  values[2] = analogRead(sensor3Pin) / 20;
-  values[3] = analogRead(sensor4Pin) / 20;
-  values[4] = analogRead(sensor5Pin) / 20;
-  values[5] = analogRead(sensor6Pin) / 20;
-  values[6] = analogRead(sensor7Pin) / 20;
+  values[0] = analogRead(sensor1Pin);
+  values[1] = analogRead(sensor2Pin);
+  values[2] = analogRead(sensor3Pin);
+  values[3] = analogRead(sensor4Pin);
+  values[4] = analogRead(sensor5Pin);
+  values[5] = analogRead(sensor6Pin);
+  values[6] = analogRead(sensor7Pin);
 
+  pinHasta = lowestPin + tiros_restantes - 1;
+  for (int h = lowestPin; h <= pinHasta; h++) {
+    analogWrite(h, 255);
+    for (int j = highestPin; j > pinHasta; j--) {
+      analogWrite(j, 0);
+    }
+  }
 
   for (i = 0; i < 7; i++) {
     if ( values[i] > cota ) {
@@ -212,6 +235,16 @@ void loop() {
 
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
