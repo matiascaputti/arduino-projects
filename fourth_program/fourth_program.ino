@@ -71,7 +71,7 @@ int puntaje = 0;
 int values[7];
 int maxValue;
 int i, iMax;
-int cota = 100;
+int cota = -1;
 
 // Variables leds arriba
 const int lowestPin = 31;
@@ -79,7 +79,6 @@ const int highestPin = 39;
 
 int pinHasta;
 int thisPin = highestPin;
-
 
 
 void setup() {
@@ -106,6 +105,17 @@ void blinkRGB(int pinRed, int pinGreen, int pinBlue,
 void action(int sensorValue, int RGB_redPin, int RGB_greenPin,
             int RGB_bluePin, char RGB_type, String RGB_name) {
 
+
+  pinHasta = lowestPin + tiros_restantes - 1;
+  for (int h = lowestPin; h <= pinHasta; h++) {
+    analogWrite(h, 255);
+  };
+
+    for (int j = highestPin; j > pinHasta; j--) {
+      analogWrite(j, 0);
+    };
+
+
   //Serial.println(sensorValue);
   if (sensorValue > cota) {
 
@@ -114,10 +124,11 @@ void action(int sensorValue, int RGB_redPin, int RGB_greenPin,
       }
       blinkRGB(RGB_redPin, RGB_greenPin, RGB_bluePin, 0, 0, 0, RGB_type, RGB_name);
       sensorValue = analogRead(sensor1Pin);
-      cota = sensorValue + 50;
+      cota = sensorValue + 40;
+      Serial.println(cota);
 
       tiros_restantes = tiros_restantes - 1;
-      if (tiros_restantes == 0) {
+      if (tiros_restantes == -1) {
         tiros_restantes = 9;
       }
   }
@@ -194,6 +205,10 @@ void loop() {
   action(sensor7Value, RGB_7_redPin, RGB_7_greenPin, RGB_7_bluePin, RGB_7_type, RGB_7_name);
   */
 
+
+
+
+
   // JUEGO PARA 7 SENSORES
   values[0] = analogRead(sensor1Pin);
   values[1] = analogRead(sensor2Pin);
@@ -203,13 +218,8 @@ void loop() {
   values[5] = analogRead(sensor6Pin);
   values[6] = analogRead(sensor7Pin);
 
-  pinHasta = lowestPin + tiros_restantes - 1;
-  for (int h = lowestPin; h <= pinHasta; h++) {
-    analogWrite(h, 255);
-    for (int j = highestPin; j > pinHasta; j--) {
-      analogWrite(j, 0);
-    }
-  }
+
+
 
   for (i = 0; i < 7; i++) {
     if ( values[i] > cota ) {
@@ -218,6 +228,9 @@ void loop() {
       //iMax = i;
     }
   }
+
+
+
 
   /*
   for (i = 0; i < 7; i++) {
