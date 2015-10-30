@@ -1,4 +1,7 @@
 #include <limits.h>
+#include <SevSeg.h>
+
+SevSeg sevseg; //Initiate a seven segment controller object
 
 // Config Sensor 1
 int sensor1Pin = A5;    // select the input pin for the potentiometer
@@ -63,6 +66,10 @@ int RGB_7_bluePin  = 22;
 char RGB_7_type = 'A';
 String RGB_7_name = "RGB_7";
 
+byte numDigits = 4;
+byte digitPins[] = {42, 43, 44, 45};
+byte segmentPins[] = {46, 47, 48, 49, 50, 51, 52, 53};
+
 
 int tiros_restantes = 9;
 int puntaje = 0;
@@ -71,7 +78,7 @@ int puntaje = 0;
 int values[7];
 int maxValue;
 int i, iMax;
-int cota = -1;
+int cota = 50;
 
 // Variables leds arriba
 const int lowestPin = 31;
@@ -89,6 +96,10 @@ void setup() {
   pinMode(RGB_1_greenPin, OUTPUT);
   pinMode(RGB_1_bluePin, OUTPUT);
   */
+
+  sevseg.begin(COMMON_ANODE, numDigits, digitPins, segmentPins);
+  sevseg.setBrightness(90);
+  
   Serial.println("Insert coin...");
   Serial.println("Play!");
 }
@@ -105,28 +116,28 @@ void blinkRGB(int pinRed, int pinGreen, int pinBlue,
 void action(int sensorValue, int RGB_redPin, int RGB_greenPin,
             int RGB_bluePin, char RGB_type, String RGB_name) {
 
-
   pinHasta = lowestPin + tiros_restantes - 1;
   for (int h = lowestPin; h <= pinHasta; h++) {
     analogWrite(h, 255);
   };
-
+  
     for (int j = highestPin; j > pinHasta; j--) {
       analogWrite(j, 0);
     };
 
-
+    
   //Serial.println(sensorValue);
   if (sensorValue > cota) {
-
+      
       for (int i = 1; i < 3000; i++) {
         blinkRGB(RGB_redPin, RGB_greenPin, RGB_bluePin, 0, 0, 255, RGB_type, RGB_name);
       }
+
       blinkRGB(RGB_redPin, RGB_greenPin, RGB_bluePin, 0, 0, 0, RGB_type, RGB_name);
       sensorValue = analogRead(sensor1Pin);
       cota = sensorValue + 40;
-      Serial.println(cota);
 
+      
       tiros_restantes = tiros_restantes - 1;
       if (tiros_restantes == -1) {
         tiros_restantes = 9;
@@ -137,7 +148,7 @@ void action(int sensorValue, int RGB_redPin, int RGB_greenPin,
 
 
 
-void calcula(int values[7]) {
+void calcula(int values[7]) {  
   values[0] = analogRead(sensor1Pin);
   values[1] = analogRead(sensor2Pin);
   values[2] = analogRead(sensor3Pin);
@@ -180,8 +191,18 @@ void calcula(int values[7]) {
 
 }
 
+
+void score() {
+  sevseg.setNumber(1234,-1);
+  sevseg.refreshDisplay(); // Must run repeatedly
+}
+
+
 void loop() {
 
+  
+
+  
   // TEST 1 LED A LA VEZ
   /*
   sensor1Value = analogRead(sensor1Pin) / 20;
@@ -204,11 +225,7 @@ void loop() {
   action(sensor6Value, RGB_6_redPin, RGB_6_greenPin, RGB_6_bluePin, RGB_6_type, RGB_6_name);
   action(sensor7Value, RGB_7_redPin, RGB_7_greenPin, RGB_7_bluePin, RGB_7_type, RGB_7_name);
   */
-
-
-
-
-
+  
   // JUEGO PARA 7 SENSORES
   values[0] = analogRead(sensor1Pin);
   values[1] = analogRead(sensor2Pin);
@@ -219,8 +236,6 @@ void loop() {
   values[6] = analogRead(sensor7Pin);
 
 
-
-
   for (i = 0; i < 7; i++) {
     if ( values[i] > cota ) {
       calcula(values);
@@ -228,8 +243,6 @@ void loop() {
       //iMax = i;
     }
   }
-
-
 
 
   /*
